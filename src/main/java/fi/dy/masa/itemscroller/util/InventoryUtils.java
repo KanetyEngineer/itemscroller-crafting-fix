@@ -1667,6 +1667,49 @@ public class InventoryUtils
         if (slot != null && isStackEmpty(recipe.getResult()) == false)
         {
             dropStacks(gui, recipe.getResult(), slot, false);
+
+            if (Configs.Generic.DROP_RECIPE_REMAINDER.getBooleanValue())
+            {
+                throwAllRecipeRemaindersToGround(recipe, gui, slot);
+            }
+        }
+    }
+
+    /**
+     * Crafting Fix: Throws out the crafting remainders of the recipe (for example
+     * the Glass Bottles left over from crafting Honey Blocks), so that they don't
+     * fill up the inventory while mass crafting.
+     * Remainder items that are also ingredients of the recipe are kept.
+     */
+    public static void throwAllRecipeRemaindersToGround(RecipePattern recipe,
+                                                        AbstractContainerScreen<? extends AbstractContainerMenu> gui,
+                                                        Slot slotReference)
+    {
+        ItemStack[] recipeItems = recipe.getRecipeItems();
+        List<ItemStack> remainders = new ArrayList<>();
+
+        for (ItemStack ingredient : recipeItems)
+        {
+            if (isStackEmpty(ingredient))
+            {
+                continue;
+            }
+
+            ItemStack remainder = ingredient.getItem().getCraftingRemainder();
+
+            if (isStackEmpty(remainder) ||
+                remainders.stream().anyMatch(s -> areStacksEqual(s, remainder)) ||
+                Arrays.stream(recipeItems).anyMatch(s -> isStackEmpty(s) == false && areStacksEqual(s, remainder)))
+            {
+                continue;
+            }
+
+            remainders.add(remainder);
+        }
+
+        for (ItemStack remainder : remainders)
+        {
+            dropStacks(gui, remainder, slotReference, false);
         }
     }
 

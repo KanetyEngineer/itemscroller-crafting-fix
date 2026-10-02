@@ -1,20 +1,22 @@
 {
 	"schemaVersion": 1,
 	"id": "itemscroller",
-	"name": "Item Scroller",
+	"name": "Item Scroller (Crafting Fix)",
 	"version": "${mod_version}",
 
-	"description": "Move items in inventory GUIs by scrolling the mouse wheel or dragging over slots",
+	"description": "Move items in inventory GUIs by scrolling the mouse wheel or dragging over slots. Crafting Fix build for 1.21.11, based on Andrews54757's itemscroller-crafting-fix.",
 	"authors": [
 		"masa"
 	],
 	"contributors": [
-		"Sakura-Ryoko"
+		"Sakura-Ryoko",
+		"Andrews54757",
+		"KanetyEngineer"
 	],
 	"contact": {
 		"homepage": "https://www.curseforge.com/minecraft/mc-mods/item-scroller",
-		"issues": "https://github.com/maruohon/itemscroller/issues",
-		"sources": "https://github.com/maruohon/itemscroller",
+		"issues": "https://github.com/KanetyEngineer/itemscroller-crafting-fix/issues",
+		"sources": "https://github.com/KanetyEngineer/itemscroller-crafting-fix",
 		"twitter": "https://twitter.com/maruohon",
 		"discord": "https://discordapp.com/channels/211786369951989762/453662800460644354/"
 	},
